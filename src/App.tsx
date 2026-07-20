@@ -47,13 +47,23 @@ function App() {
                 }
               </select>
             }/>
-            
+
             <OptionBox name='Select Color' extraCode={
               <input type='color' value={bannerStyles.backgroundColor} onChange={(event) => setBannerStyle({
                 ...bannerStyles,
                 backgroundColor: event.target.value
               })}></input>
             } />
+
+            <OptionBox name='Your text' extraCode={
+              <input type='text'
+              placeholder={bannerStyles.textContent}
+              onChange={(event) => setBannerStyle({
+                ...bannerStyles,
+                textContent: event.target.value
+              })}
+              ></input>
+            }/>
           
           </div>
           
