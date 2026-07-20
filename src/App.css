@@ -1,0 +1,58 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  background-color: red;
+  height: 4vh;
+}
+
+header div {
+  background-color: aqua;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.optionsSection {
+  display: flex;
+  gap: 40px;
+}
+
+main {
+  background-color: turquoise;
+  height: 96vh;
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.sideBar {
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.sideBar div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.mainDiv {
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner {
+  width: 85%;
+  height: 60%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}

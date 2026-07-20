@@ -1,0 +1,9 @@
+.text {
+    color: white;
+}
+
+.mainBox {
+    background-color: blue;
+    border: 1px solid;
+    height: 60px;
+}
