@@ -2,6 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import OptionBox from './components/OptionBox/OptionBox'
 
+const avaiableFonts: string[] = [
+  'Arial',
+  'Roboto',
+  'Monospace'
+]
+
 function App() {
 
   const [bannerStyles, setBannerStyle] = useState({
@@ -9,22 +15,6 @@ function App() {
     textFont: 'Arial',
     textContent: 'Your Text here'
   })
-
-  function changeFont() {
-    const newFont = String(prompt('Write the desired font here: '))
-
-    if (newFont.trim().length === 0 || typeof(newFont) === null) {
-      alert('Invalid font')
-      return
-    }
-
-    setBannerStyle((bannerStyles) => (
-      {
-        ...bannerStyles,
-        textFont: newFont
-      }
-    ))
-  }
   
   return (
     <>
@@ -35,7 +25,7 @@ function App() {
           </section>
           
           <section className='optionsSection'>
-            
+
           </section>
           
         </div>
@@ -44,7 +34,18 @@ function App() {
       <main>
         <aside className='sideBar'>
           <div>
-            <OptionBox func={changeFont} />
+            <OptionBox name='Select Font' extraCode={
+              <select value={bannerStyles.textFont} onChange={(event) => setBannerStyle({
+                ...bannerStyles,
+                textFont: event.target.value
+              })}>
+                {
+                  avaiableFonts.map((item, index) => (
+                    <option value={item} key={index}>{item}</option> // TALVEZ MUDE ALGO QUANDO FOR SELECIONAR ELE
+                  ))
+                }
+              </select>
+            }/>
             
             
           </div>
