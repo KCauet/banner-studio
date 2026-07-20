@@ -39,6 +39,7 @@ function App() {
                 ...bannerStyles,
                 textFont: event.target.value
               })}>
+
                 {
                   avaiableFonts.map((item, index) => (
                     <option value={item} key={index}>{item}</option> // TALVEZ MUDE ALGO QUANDO FOR SELECIONAR ELE
@@ -47,7 +48,13 @@ function App() {
               </select>
             }/>
             
-            
+            <OptionBox name='Select Color' extraCode={
+              <input type='color' value={bannerStyles.backgroundColor} onChange={(event) => setBannerStyle({
+                ...bannerStyles,
+                backgroundColor: event.target.value
+              })}></input>
+            } />
+          
           </div>
           
         </aside>
