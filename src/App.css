@@ -16,21 +16,19 @@ header div {
   /*justify-content: space-around;*/
 }
 
-input[type='checkbox'],
-input[type='color'],
-select {
+input[type='checkbox'], input[type='color'], select {
   cursor: pointer;
-}
-
-.optionsSection {
-  display: flex;
-  gap: 40px;
 }
 
 main {
   height: 95vh;
   display: grid;
   grid-template-columns: 20% 80%;
+}
+
+.optionsSection {
+  display: flex;
+  gap: 40px;
 }
 
 .sideBar {
@@ -50,15 +48,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.banner {
-  width: calc(1920px / 3);
-  height: calc(1080px / 3);
-  border: 2px solid;
-  display: flex;
-  align-items: center;
-  padding: 20px;
 }
 
 .checkboxDiv {

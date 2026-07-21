@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import './App.css'
+
 import OptionBox from './components/OptionBox/OptionBox'
 import AlignmentMiniPreview from './components/AlignmentMiniPreview/AlignmentMiniPreview'
+import Banner from './components/Banner/Banner'
 
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
@@ -26,8 +28,7 @@ function App() {
     color: bannerStyles.textColor,
     fontSize: bannerStyles.textFontSize,
     fontWeight: bannerStyles.BoldText ? "Bold" : 'normal',
-    fontStyle: bannerStyles.ItalicText ? "italic" : 'normal',
-    textAlign: bannerStyles.textAlignment
+    fontStyle: bannerStyles.ItalicText ? "italic" : 'normal'
   }
   
   return (
@@ -134,15 +135,8 @@ function App() {
           
         </aside>
         <div className='mainDiv'>
-
-          <section 
-          className='banner'
-          style={{
-            backgroundColor: bannerStyles.backgroundColor
-          }}
-          >
-            <h1 style={bannerTextStyles}>{bannerStyles.textContent}</h1>
-          </section>
+          
+          <Banner mainStyles={bannerStyles} textStyles={bannerTextStyles} />
 
         </div>
       </main>
