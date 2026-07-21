@@ -1,4 +1,4 @@
-# Profile Banner Creator
+# Banner Studio
 
 Aqui lhe apresento um dos meus projetos que será incluído no meu portifólio
 
