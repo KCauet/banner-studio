@@ -20,6 +20,8 @@ v0.2 - adições futuras
 
 -- Edições mais avançadas pro texto e mais opções de fontes
 
+-- melhor estilização do site e nome do projeto renomeado para Banner Studio
+
 ## React Compiler
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
