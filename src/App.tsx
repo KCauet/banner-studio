@@ -8,28 +8,34 @@ import Banner from './components/Banner/Banner'
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
 
-type BannerElement = TextElement | RectangleElement
+export type BannerElements = TextElement | RectangleElement
 
-interface BaseElement {
+export interface BaseElement {
   id: number;
   type: 'text' | 'rectangle' | 'image';
   x: number;
   y: number;
 }
 
-interface TextElement extends BaseElement {
+export interface TextElement extends BaseElement {
   type: 'text';
   text: string;
-  color: string;
-  fontStyle: string;
-  fontWeight: string;
-  fontSize: number;
+  styles: {
+    color: string;
+    fontStyle: string;
+    fontWeight: string;
+    fontSize: number;
+  }
 }
 
-interface RectangleElement extends BaseElement {
+export interface RectangleElement extends BaseElement {
   type: 'rectangle';
-  backgroundColor: 'grey';
-  borderColor: 'black';
+  styles: {
+    width: number;
+    height: number;
+    backgroundColor: string;
+    border: string;
+  }
 }
 
 function App() {
@@ -52,28 +58,31 @@ function App() {
     fontStyle: bannerStyles.ItalicText ? "italic" : 'normal'
   }
 
-  const [bannerElements, setElements] = useState<BannerElement[]>([
+  const [bannerElements, setElements] = useState<BannerElements[]>([
     {
       id: 0,
       type: 'text',
       text: 'youtube',
       x: 10,
       y: 10,
-      color: 'white',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
-      fontSize: 24
+      styles: {
+        color: 'white',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontSize: 24
+      }
     },
     {
       id: 0,
-      type: 'text',
-      text: 'you',
+      type: 'rectangle',
       x: 10,
       y: 10,
-      color: 'white',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
-      fontSize: 24
+      styles: {
+        width: 20,
+        height: 20,
+        backgroundColor: 'red',
+        border: '1px solid'
+      }
     }
   ])
   
@@ -182,16 +191,11 @@ function App() {
         </aside>
         <div className='mainDiv'>
           
-          <Banner mainStyles={bannerStyles} textStyles={bannerTextStyles}>
-            {bannerElements.map((element, index) => {
-              switch(element.type) {
-                case "text":
-                  return <h1 key={index}>{element.text}</h1>
-                case "rectangle":
-                  return <div key={index} style={{width: '50px', height: '50px'}} ></div>
-              }
-            })}
-          </Banner>
+          <Banner
+          mainStyles={bannerStyles}
+          textStyles={bannerTextStyles}
+          elementsList={bannerElements}
+          />
 
         </div>
       </main>

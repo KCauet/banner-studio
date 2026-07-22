@@ -1,6 +1,7 @@
-import { Children } from 'react'
 import styles from './Banner.module.css'
 
+import type { BannerElements } from '../../App'
+import BannerElement from './BannerElement'
 
 interface properties {
     mainStyles: {
@@ -19,20 +20,22 @@ interface properties {
         fontWeight: string,
         fontStyle: string,
     },
-    children?: React.ReactNode
+    elementsList: BannerElements[]
 }
 
-function Banner(props: properties) {
+function Banner({mainStyles, textStyles, elementsList}: properties) {
     return (
         <>
             <section
             className={styles.banner}
-            style={{
-                backgroundColor: props.mainStyles.backgroundColor
-            }}
-            >
-            <h1 style={props.textStyles}>{props.mainStyles.textContent}</h1>
-            <div>{props.children}</div>
+            style={{backgroundColor: mainStyles.backgroundColor}}>
+            <h1 style={textStyles}>{mainStyles.textContent}</h1>
+            {elementsList.map((element) => (
+                <BannerElement
+                key={element.id}
+                elementProps={element}
+                />
+            ))}
           </section>
         </>
     )
