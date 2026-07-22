@@ -12,9 +12,10 @@ export type BannerElements = TextElement | RectangleElement
 
 export interface BaseElement {
   id: number;
-  type: 'text' | 'rectangle' | 'image';
+  type: 'text' | 'rectangle';
   x: number;
   y: number;
+  selected: boolean
 }
 
 export interface TextElement extends BaseElement {
@@ -61,6 +62,7 @@ function App() {
   const [bannerElements, setElements] = useState<BannerElements[]>([
     {
       id: 0,
+      selected: false,
       type: 'text',
       text: 'youtube',
       x: 10,
@@ -74,6 +76,7 @@ function App() {
     },
     {
       id: 0,
+      selected: false,
       type: 'rectangle',
       x: 10,
       y: 10,
@@ -85,6 +88,47 @@ function App() {
       }
     }
   ])
+
+  function addComponent(type: BaseElement['type']) {
+    const templateElement = createComponentTemplate(type, 1)
+    
+    setElements([...bannerElements, templateElement])
+  }
+
+  function createComponentTemplate(type: BaseElement['type'], id: number): BannerElements {
+    switch(type) {
+      case 'text':
+        return {
+          id: id,
+          selected: false,
+          type: 'text',
+          text: 'Example Text',
+          x: 10,
+          y: 10,
+          styles: {
+            color: 'white',
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            fontSize: 24
+          }
+          
+        }
+      case 'rectangle':
+        return {
+          id: id,
+          selected: false,
+          type: 'rectangle',
+          x: 10,
+          y: 10,
+          styles: {
+            width: 20,
+            height: 20,
+            backgroundColor: 'red',
+            border: '1px solid'
+          }
+        }
+    }
+  }
   
   return (
     <>
@@ -95,7 +139,16 @@ function App() {
           </section>
           
           <section className='optionsSection'>
-            {/* usaremos isso em breve */}
+
+            <OptionBox name='Add components'>
+              <select name="Components">
+
+                <option onClick={() => addComponent('text')}>Text</option>
+                <option onClick={() => addComponent('rectangle')}>Rectangle</option>
+
+              </select>
+            </OptionBox>
+
           </section>
           
         </div>
