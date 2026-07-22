@@ -2,15 +2,17 @@ import type {TextElement, RectangleElement } from "../../types/BannerTypes"
 
 
 interface Elements {
-    elementProps: TextElement | RectangleElement
+    elementProps: TextElement | RectangleElement,
+    onSelect: (id: number) => void
 }
 
-function BannerElement({elementProps}: Elements) {
+function BannerElement({elementProps, onSelect}: Elements) {
 
     function RederizeCorrectElement() {
         switch(elementProps.type) {
             case 'text':
-                return <h1 key={elementProps.id} style={elementProps.styles}>{elementProps.text}</h1>
+                return <h1 key={elementProps.id} onClick={() => {onSelect(elementProps.id)}}
+                style={elementProps.styles}>{elementProps.text}</h1>
             case 'rectangle':
                 return <section key={elementProps.id} style={elementProps.styles}></section>
         }

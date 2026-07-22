@@ -17,20 +17,21 @@ export interface properties {
         fontWeight: string,
         fontStyle: string,
     },
-    elementsList: BannerElements[]
+    elementsList: BannerElements[],
+    onSelect: (id: number) => void;
 }
 
-function Banner({mainStyles, textStyles, elementsList}: properties) {
+function Banner({mainStyles, textStyles, elementsList, onSelect}: properties) {
     return (
         <>
             <section
             className={styles.banner}
             style={{backgroundColor: mainStyles.backgroundColor}}>
-            <h1 style={textStyles}>{textStyles.textContent}</h1>
             {elementsList.map((element) => (
                 <BannerElement
                 key={element.id}
                 elementProps={element}
+                onSelect={onSelect}
                 />
             ))}
           </section>

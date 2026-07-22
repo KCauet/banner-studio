@@ -43,7 +43,7 @@ function App() {
       }
     },
     {
-      id: 0,
+      id: 1,
       selected: false,
       type: 'rectangle',
       x: 10,
@@ -56,6 +56,9 @@ function App() {
       }
     }
   ])
+
+  const [selectedId, setSelectedId] = useState<number | null>(0);
+  const selectedElement = bannerElements.find(element => element.id === selectedId)
 
   function addComponent(type: BaseElement['type']) {
     const templateElement = createComponentTemplate(type, 1)
@@ -73,7 +76,7 @@ function App() {
           x: 10,
           y: 10,
           styles: {
-            color: 'white',
+            color: 'black',
             fontStyle: 'normal',
             fontWeight: 'normal',
             fontSize: 24
@@ -96,7 +99,11 @@ function App() {
         }
     }
   }
-  
+
+  function selectComponent(id: number) {
+    setSelectedId(id)
+  }
+
   return (
     <>
       <header>
@@ -126,11 +133,23 @@ function App() {
 
               <h2>Your text</h2>
               <input type='text'
-              placeholder={curTextStyles.textContent}
-              onChange={(event) => setCurTextStyles({
-                ...curTextStyles,
-                textContent: event.target.value
-              })}
+              placeholder={selectedElement?.type === 'text' ? selectedElement.text : ''}
+              onChange={(event) => {
+                const newList = bannerElements.map(element => {
+                  // Estrutura... (chora em desespero)
+                  if (element.id === selectedId && element.type === 'text') {
+                    return {
+                      ...element,
+                      text: event.target.value
+                    }
+
+                  }
+                  
+                  return element
+                })
+
+                setElements(newList) // Devia ser assim?
+              }}
               ></input>
 
               <div className='checkboxDiv' style={{display: 'flex', flexDirection: 'row'}}>
@@ -213,6 +232,7 @@ function App() {
           mainStyles={curBannerStyles}
           textStyles={curTextStyles}
           elementsList={bannerElements}
+          onSelect={selectComponent}
           />
 
         </div>
