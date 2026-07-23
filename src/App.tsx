@@ -8,7 +8,7 @@ import Banner from './components/Banner/Banner'
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
 
-import type { BannerElements, BaseElement } from './types/BannerTypes'
+import type { BannerElements, BaseElement, TextElement } from './types/BannerTypes'
 
 function App() {
 
@@ -57,7 +57,7 @@ function App() {
     }
   ])
 
-  const [selectedId, setSelectedId] = useState<number | null>(0);
+  const [selectedId, setSelectedId] = useState<number | null>(1);
   const selectedElement = bannerElements.find(element => element.id === selectedId)
 
   function addComponent(type: BaseElement['type']) {
@@ -104,6 +104,57 @@ function App() {
     setSelectedId(id)
   }
 
+  function updateText(changes: string) {
+    const newList = bannerElements.map(element => {
+      if (element.id === selectedId && element.type === 'text') {
+        return {
+          ...element,
+          text: changes
+        }
+      }
+
+      return element
+    })
+
+    setElements(newList)
+  }
+
+  function updateTextColor(changes: string) {
+    const newList = bannerElements.map(element => {
+      if (element.id === selectedId && element.type === 'text') {
+        return {
+          ...element,
+          styles: {
+            ...element.styles,
+            color: changes
+          }
+        }
+      }
+
+      return element
+    })
+
+    setElements(newList)
+  }
+
+  function updateFont(changes: string) {
+    const newList = bannerElements.map(element => {
+      if (element.id === selectedId && element.type === 'text') {
+        return {
+          ...element,
+          styles: {
+            ...element.styles,
+            fontStyle: changes
+          }
+        }
+      }
+
+      return element
+    })
+
+    setElements(newList)
+  }
+
   return (
     <>
       <header>
@@ -135,20 +186,7 @@ function App() {
               <input type='text'
               placeholder={selectedElement?.type === 'text' ? selectedElement.text : ''}
               onChange={(event) => {
-                const newList = bannerElements.map(element => {
-                  // Estrutura... (chora em desespero)
-                  if (element.id === selectedId && element.type === 'text') {
-                    return {
-                      ...element,
-                      text: event.target.value
-                    }
-
-                  }
-                  
-                  return element
-                })
-
-                setElements(newList) // Devia ser assim?
+                updateText(event.target.value)
               }}
               ></input>
 
@@ -214,10 +252,9 @@ function App() {
               })}></input>
 
               <h2>Text Color</h2>
-              <input type='color' value={curTextStyles.color} onChange={(event) => setCurTextStyles({
-                ...curTextStyles,
-                color: event.target.value
-              })}></input>
+              <input type='color'  onChange={(event) => updateTextColor(event.target.value)}>
+              
+              </input>
 
             </OptionBox>
             
